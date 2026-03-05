@@ -23,7 +23,8 @@ const Home = () => {
   useEffect(() => {
     const fetchPosts = async () => {
       try {
-        const res = await axios.get('http://localhost:5000/api/posts');
+        const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+        const res = await axios.get(`${apiUrl}/api/posts`);
         setPosts(res.data);
       } catch (err) {
         console.error(err);
@@ -52,6 +53,8 @@ const Home = () => {
     { id: 'need_flat', label: 'Need Flat' },
     { id: 'need_land', label: 'Need Land' },
   ];
+
+  const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:5000';
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -124,7 +127,7 @@ const Home = () => {
                 <div className="relative h-48 sm:h-56 w-full bg-gray-200 overflow-hidden">
                   {post.image ? (
                     <img 
-                      src={`http://localhost:5000/${post.image}`} 
+                      src={`${apiUrl}/${post.image}`} 
                       alt={post.title} 
                       className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500" 
                     />

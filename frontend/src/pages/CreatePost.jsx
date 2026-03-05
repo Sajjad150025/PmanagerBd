@@ -41,7 +41,8 @@ const CreatePost = () => {
       Object.keys(formData).forEach(key => data.append(key, formData[key]));
       if (image) data.append('image', image);
 
-      await axios.post('http://localhost:5000/api/posts', data, {
+      const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+      await axios.post(`${apiUrl}/api/posts`, data, {
         headers: { 
           Authorization: `Bearer ${token}`,
           'Content-Type': 'multipart/form-data'

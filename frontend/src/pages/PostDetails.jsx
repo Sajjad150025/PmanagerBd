@@ -10,7 +10,8 @@ const PostDetails = () => {
   useEffect(() => {
     const fetchPost = async () => {
       try {
-        const res = await axios.get(`http://localhost:5000/api/posts/${id}`);
+        const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+        const res = await axios.get(`${apiUrl}/api/posts/${id}`);
         setPost(res.data);
       } catch (err) {
         console.error(err);
@@ -34,13 +35,15 @@ const PostDetails = () => {
     </div>
   );
 
+  const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+
   return (
     <div className="min-h-screen bg-gray-50 py-6 sm:py-10 px-4 sm:px-6">
       <div className="max-w-4xl mx-auto bg-white rounded-2xl shadow-xl overflow-hidden">
         {/* Image Header */}
         <div className="relative h-64 sm:h-96 w-full bg-gray-200">
            {post.image ? (
-             <img src={`http://localhost:5000/${post.image}`} alt={post.title} className="w-full h-full object-cover" />
+             <img src={`${apiUrl}/${post.image}`} alt={post.title} className="w-full h-full object-cover" />
            ) : (
              <div className="w-full h-full flex items-center justify-center bg-gray-100 text-gray-400">
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-20 w-20" fill="none" viewBox="0 0 24 24" stroke="currentColor">
